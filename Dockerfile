@@ -14,7 +14,7 @@ FROM node:18 AS builder
 WORKDIR /app
 
 # Clone your repository
-ARG REPO_URL="https://github.com/kelldw/listmonk.git"
+ARG REPO_URL="https://github.com/kelldw/listmonk"
 ARG BRANCH="main"
 RUN git clone -b ${BRANCH} ${REPO_URL} .
 
