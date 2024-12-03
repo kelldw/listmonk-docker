@@ -26,10 +26,6 @@ RUN npm run build
 # Final stage: Runtime
 FROM node:18-slim
 
-WORKDIR /app
-
-
-
 
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
