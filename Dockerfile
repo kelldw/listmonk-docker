@@ -28,20 +28,25 @@ FROM node:18-slim
 
 WORKDIR /app
 
-# Copy built application from builder stage
+
+
+
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json .
 
 # Copy Caddy configurations
+ENV LISTMONK_app__address="127.0.0.1:9000"
+RUN apk add --no-cache parallel openssl
+
 COPY --from=caddy /srv/Caddyfile ./
 COPY --from=caddy /usr/bin/caddy /usr/bin/caddy
 
 # Add any additional runtime dependencies
-RUN apt-get update && apt-get install -y \
-    parallel \
-    openssl \
-    && rm -rf /var/lib/apt/lists/*
+#RUN apt-get update && apt-get install -y \
+#    parallel \
+#    openssl \
+#    && rm -rf /var/lib/apt/lists/*
 
 # Copy scripts
 COPY --chmod=755 scripts/* ./
