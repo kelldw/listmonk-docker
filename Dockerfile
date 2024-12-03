@@ -15,7 +15,7 @@ WORKDIR /app
 
 # Clone your repository
 ARG REPO_URL="https://github.com/kelldw/listmonk"
-ARG BRANCH="main"
+ARG BRANCH="master"
 RUN git clone -b ${BRANCH} ${REPO_URL} .
 
 # Install dependencies and build
